@@ -107,6 +107,9 @@ MonoBehaviour:
   hitOverlaySprite: {fileID: 6309799270859187902}
   approachCircleSprite: {fileID: 5156291540182356959}
   numberSprite: {fileID: 1217908025662793813}
+  sprite300: {fileID: 6321091068429342766, guid: 9fbe880c87e617748ad62828ebe13b0b, type: 3}
+  sprite100: {fileID: 5947033849641293045, guid: a50d24f16adc57a45a332a827f3fe2af, type: 3}
+  spriteMiss: {fileID: 1255949416096160019, guid: ae83ce580bf30fe4da271d6d1e0bacc0, type: 3}
   fadeInTime: 1
   fadeOutTime: 0
   targetTime: 0

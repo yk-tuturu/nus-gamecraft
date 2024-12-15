@@ -26,7 +26,6 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     public float songLength = 4f;
 
-    float target = 4f;
     void Awake()
     {
         instance = this;
@@ -57,9 +56,5 @@ public class MusicManager : MonoBehaviour
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;
-
-        if (songPositionInBeats >= target) {
-            target += 4f;
-        }
     }
 }

@@ -23,7 +23,9 @@ public class rhythmEventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        overlay.DOFade((float)188/255, 0.2f).OnComplete(()=> {
+        mainCamera = Camera.main; 
+
+        overlay.DOFade((float)188/255, 0.5f).OnComplete(()=> {
             Begin();
         });
     }
@@ -53,7 +55,6 @@ public class rhythmEventManager : MonoBehaviour
                 {
                     hitCircle circleScript = hit.collider.GetComponent<hitCircle>();
                     if (circleScript != null) {
-                        Debug.Log("reached circle script");
                         score += circleScript.calculateScore();
                     }
                 }

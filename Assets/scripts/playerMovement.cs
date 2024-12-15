@@ -45,7 +45,6 @@ public class playerMovement : MonoBehaviour
         }
     }
 
-    // fix this!!!
     void updateDirection() {
         if (movementInput == Vector2.zero) {
             return;
@@ -81,7 +80,7 @@ public class playerMovement : MonoBehaviour
         }
         RaycastHit2D hit = Physics2D.Raycast(box_center, direction , laserLength, interactMask);
         if (hit.collider != null) {
-            Debug.Log("hit something!");
+            hit.collider.GetComponent<Interactable>().Interact();
         }
     }
 }

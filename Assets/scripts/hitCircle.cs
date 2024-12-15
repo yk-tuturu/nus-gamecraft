@@ -12,6 +12,10 @@ public class hitCircle : MonoBehaviour
     public SpriteRenderer approachCircleSprite;
     public SpriteRenderer numberSprite;
 
+    public GameObject sprite300; 
+    public GameObject sprite100;
+    public GameObject spriteMiss;
+
     // timing constants 
     public float fadeInTime;
     public float fadeOutTime;
@@ -41,6 +45,7 @@ public class hitCircle : MonoBehaviour
     void Update() {
         float songPos = MusicManager.instance.songPosition;
         if (songPos > targetTime + goodWindow && !despawning) {
+            Instantiate(spriteMiss, transform.position, Quaternion.identity);
             Despawn();
         }
     }
@@ -75,16 +80,19 @@ public class hitCircle : MonoBehaviour
         if (hitError < perfectWindow) {
             Debug.Log("perfect");
             audioSource.PlayOneShot(hitSound);
+            Instantiate(sprite300, transform.position, Quaternion.identity);
             Despawn();
             return 300;
 
         } else if (hitError < goodWindow) {
             Debug.Log("good");
             audioSource.PlayOneShot(hitSound);
+            Instantiate(sprite100, transform.position, Quaternion.identity);
             Despawn();
             return 100;
         } else {
             Debug.Log("miss");
+            Instantiate(spriteMiss, transform.position, Quaternion.identity);
             return 0;
         }
     }
