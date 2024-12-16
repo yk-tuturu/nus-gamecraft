@@ -22,6 +22,7 @@ public class CoffeeRhythmState : CoffeeBaseState
     }
 
     public override void ExitState(CoffeeStateManager coffee) {
+        coffee.currentScore = ((float)currentRhythmEvent.score / (currentRhythmEvent.noteCount * 300)) * 100;
         currentRhythmEvent.rhythmEnd.RemoveListener(OnEnd);
         rhythmEnded = false;
         coffee.unfreezePlayer.Invoke();

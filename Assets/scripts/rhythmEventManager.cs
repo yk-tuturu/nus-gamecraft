@@ -13,6 +13,7 @@ public class rhythmEventManager : MonoBehaviour
     public SpriteRenderer overlay;
 
     public int score = 0;
+    public int noteCount = 3;
     float approachRate = 0.8f;
     float endTime;
 
@@ -37,7 +38,7 @@ public class rhythmEventManager : MonoBehaviour
         float songPos = MusicManager.instance.GetSongPos();
 
         pattern = PatternManager.instance.getPattern();
-        beats = PatternManager.instance.getBeats(songPos + 1f, 3);
+        beats = PatternManager.instance.getBeats(songPos + 1f, noteCount);
 
         endTime = beats[beats.Count - 1] + 0.3f;
     }

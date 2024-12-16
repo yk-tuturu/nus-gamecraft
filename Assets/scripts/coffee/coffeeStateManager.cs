@@ -21,7 +21,7 @@ public class CoffeeStateManager : MonoBehaviour, Interactable
     public UnityEvent unfreezePlayer;
 
     public int currentDrink = 0;
-    public int currentScore = 0;
+    public float currentScore = 0f;
     
     void Start()
     {
