@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using DG.Tweening;
 
 public class rhythmEventManager : MonoBehaviour
@@ -19,6 +20,7 @@ public class rhythmEventManager : MonoBehaviour
     List<float> beats = new List<float>();
 
     bool started = false;
+    public UnityEvent rhythmEnd;
     
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,7 @@ public class rhythmEventManager : MonoBehaviour
 
     void Begin() {
         started = true;
-        float songPos = MusicManager.instance.songPosition;
+        float songPos = MusicManager.instance.GetSongPos();
 
         pattern = PatternManager.instance.getPattern();
         beats = PatternManager.instance.getBeats(songPos + 1f, 3);
@@ -61,7 +63,7 @@ public class rhythmEventManager : MonoBehaviour
             }
 
             // spawns hitcircles
-            float songPos = MusicManager.instance.songPosition;
+            float songPos = MusicManager.instance.GetSongPos();
             if (beats.Count > 0 && songPos >= beats[0] - approachRate) {
                 GameObject newCircle = Instantiate(hitCircle, pattern[0], Quaternion.identity);
                 newCircle.GetComponent<hitCircle>().targetTime = beats[0];
@@ -73,6 +75,7 @@ public class rhythmEventManager : MonoBehaviour
             // if reached end, destroy this object
             if (songPos > endTime && started) {
                 overlay.DOFade(0f, 0.2f).OnComplete(()=> {
+                    rhythmEnd.Invoke();
                     Destroy(gameObject);
                 });
             }

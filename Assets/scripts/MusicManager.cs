@@ -24,7 +24,11 @@ public class MusicManager : MonoBehaviour
     //an AudioSource attached to this GameObject that will play the music.
     public AudioSource musicSource;
     // Start is called before the first frame update
-    public float songLength = 4f;
+    public float songLength;
+
+    public float beforeSamples = -1f;
+
+    public int loopCount = 0;
 
     void Awake()
     {
@@ -45,16 +49,31 @@ public class MusicManager : MonoBehaviour
         //Start the music
         musicSource.Play();
 
-        //songLength = musicSource.clip.length;
+        songLength = musicSource.clip.length;
     }
 
     // Update is called once per frame
     void Update()
     {
         //determine how many seconds since the song started
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime);
-
+        songPosition = (float)musicSource.timeSamples / musicSource.clip.frequency;
+        float sample = musicSource.timeSamples;
+        if (beforeSamples > sample) {
+            Debug.Log("looped!");
+            loopCount++;
+            beforeSamples = sample - 1f;
+        } else if (beforeSamples < sample){
+            beforeSamples = sample - 1f;
+        }
         //determine how many beats since the song started
-        songPositionInBeats = songPosition / secPerBeat;
+        //songPositionInBeats = songPosition / secPerBeat;
+    }
+
+    public float GetSongPos() {
+        return ((float)musicSource.timeSamples / musicSource.clip.frequency + loopCount * songLength);
+    }
+
+    public float GetSongPosInBeats() {
+        return (float)GetSongPos() / secPerBeat;
     }
 }

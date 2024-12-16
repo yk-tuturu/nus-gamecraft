@@ -20,7 +20,7 @@ public class PatternManager : MonoBehaviour
     public List<List<Vector3>> patternList = new List<List<Vector3>>();
 
     public List<float> beatTimings = new List<float>() {
-        0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f, 6.5f, 7.5f
+        0.5f, 1.5f, 2.5f, 3.5f
     };
 
     void Awake() {
@@ -34,7 +34,7 @@ public class PatternManager : MonoBehaviour
     }
 
     void Update() {
-        float songPos = MusicManager.instance.songPosition;
+        float songPos = MusicManager.instance.GetSongPos();
         if (songPos > beatTimings[0]) {
             float temp = beatTimings[0];
             beatTimings.RemoveAt(0);

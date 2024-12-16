@@ -16,6 +16,8 @@ public class playerMovement : MonoBehaviour
     public ContactFilter2D movementFilter;
     public LayerMask interactMask;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+
+    public bool freeze = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class playerMovement : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (movementInput != Vector2.zero) {
+        if (movementInput != Vector2.zero && !freeze) {
             int count = rb.Cast(
                 movementInput,
                 movementFilter,
@@ -46,7 +48,7 @@ public class playerMovement : MonoBehaviour
     }
 
     void updateDirection() {
-        if (movementInput == Vector2.zero) {
+        if (movementInput == Vector2.zero || freeze) {
             return;
         }
         if (movementInput.x != 0) {
@@ -70,6 +72,10 @@ public class playerMovement : MonoBehaviour
     }
 
     void OnInteract() {
+        if (freeze) {
+            return; 
+        }
+
         Vector2 g_position = gameObject.transform.position;
         Vector2 box_center = g_position + box.offset;
         float laserLength;
@@ -82,5 +88,13 @@ public class playerMovement : MonoBehaviour
         if (hit.collider != null) {
             hit.collider.GetComponent<Interactable>().Interact();
         }
+    }
+
+    public void FreezePlayer() {
+        freeze = true;
+    }
+
+    public void UnfreezePlayer() {
+        freeze = false;
     }
 }

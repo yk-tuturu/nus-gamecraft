@@ -36,14 +36,13 @@ public class hitCircle : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = hitSound;
 
-        float songPos = MusicManager.instance.songPosition;
-        targetTime = targetTime + offset;
-        approachCircle.DOScale(new Vector3(1f, 1f, 1f), targetTime-songPos).SetEase(Ease.Linear).SetLink(gameObject);
+        float songPos = MusicManager.instance.GetSongPos();
+        approachCircle.DOScale(new Vector3(1f, 1f, 1f), 0.8f).SetEase(Ease.Linear);
         FadeSprite(1f, fadeInTime);
     }
 
     void Update() {
-        float songPos = MusicManager.instance.songPosition;
+        float songPos = MusicManager.instance.GetSongPos();
         if (songPos > targetTime + goodWindow && !despawning) {
             Instantiate(spriteMiss, transform.position, Quaternion.identity);
             Despawn();
@@ -53,10 +52,10 @@ public class hitCircle : MonoBehaviour
     void Despawn() {
         if (!despawning) {
             despawning = true;
-            hitCircleSprite.DOFade(0f, 0.1f).SetLink(gameObject);
-            hitOverlaySprite.DOFade(0f, 0.1f).SetLink(gameObject);
-            approachCircleSprite.DOFade(0f, 0.1f).SetLink(gameObject);
-            numberSprite.DOFade(0f, 0.1f).SetLink(gameObject).OnComplete(() => {
+            hitCircleSprite.DOFade(0f, 0.1f);
+            hitOverlaySprite.DOFade(0f, 0.1f);
+            approachCircleSprite.DOFade(0f, 0.1f);
+            numberSprite.DOFade(0f, 0.1f).OnComplete(() => {
                 Destroy(gameObject);
             });
         }
@@ -74,7 +73,7 @@ public class hitCircle : MonoBehaviour
             return 0;
         }
 
-        float songPos = MusicManager.instance.songPosition;
+        float songPos = MusicManager.instance.GetSongPos();
         float hitError = Mathf.Abs(songPos - targetTime);
         Debug.Log(songPos - targetTime);
         if (hitError < perfectWindow) {
