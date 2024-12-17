@@ -7,8 +7,12 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance;
 
     public List<InventoryIcon> inventory = new List<InventoryIcon>();
+    public List<InventoryIcon> tray = new List<InventoryIcon>();
     public GameObject iconPrefab;
     public Transform inventoryPanel;
+    public Transform trayPanel;
+
+    public int nextId = 0;
     // Start is called before the first frame update
     void Awake() {
         instance = this;
@@ -27,10 +31,56 @@ public class InventoryManager : MonoBehaviour
     public void AddIngredient(int index, float score) {
         GameObject iconObject = Instantiate(iconPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         InventoryIcon icon = iconObject.GetComponent<InventoryIcon>();
+        icon.id = nextId;
         icon.index = index;
         icon.score = score;
         iconObject.transform.SetParent(inventoryPanel);
 
+        nextId++;
         inventory.Add(icon);
+    }
+
+    public void AddDrinkToTray(int index, float score) {
+        GameObject iconObject = Instantiate(iconPrefab, new Vector3(0, 0, 0), Quaternion.identity, trayPanel);
+        InventoryIcon icon = iconObject.GetComponent<InventoryIcon>();
+        icon.id = nextId;
+        icon.index = index;
+        icon.score = score;
+
+        nextId++;
+        tray.Add(icon);
+    }
+
+    public InventoryIcon GetIngredientById(int id) {
+        for (int i = 0; i < inventory.Count; i++) {
+            if (inventory[i].id == id) {
+                return inventory[i];
+            }
+        }
+
+        Debug.Log("couldn't find id");
+        return null;
+    }
+
+    public int GetIngredientIndexById(int id) {
+        for (int i = 0; i < inventory.Count; i++) {
+            if (inventory[i].id == id) {
+                return i;
+            }
+        }
+
+        Debug.Log("couldn't find id");
+        return -1;
+    }
+
+    public void ConsumeIngredient(int id) {
+        for (int i = 0; i < inventory.Count; i++) {
+            if (inventory[i].id == id) {
+                GameObject temp = inventory[i].gameObject;
+                inventory.RemoveAt(i);
+                Destroy(temp);
+                return;
+            }
+        }
     }
 }

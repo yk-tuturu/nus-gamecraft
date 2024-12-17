@@ -34,7 +34,7 @@ public class Bubble : MonoBehaviour
     }
 
     public void SetSprite(int index) {
-        Sprite sprite = SpriteManager.instance.GetIngredientSprite(index - 1);
+        Sprite sprite = SpriteManager.instance.GetSprite(index);
         image.sprite = sprite;
     }
 

@@ -59,7 +59,6 @@ public class MusicManager : MonoBehaviour
         songPosition = (float)musicSource.timeSamples / musicSource.clip.frequency;
         float sample = musicSource.timeSamples;
         if (beforeSamples > sample) {
-            Debug.Log("looped!");
             loopCount++;
             beforeSamples = sample - 1f;
         } else if (beforeSamples < sample){
