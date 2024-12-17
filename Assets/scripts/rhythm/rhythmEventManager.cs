@@ -14,8 +14,9 @@ public class rhythmEventManager : MonoBehaviour
 
     public int score = 0;
     public int noteCount = 3;
-    float approachRate = 0.8f;
+    public float approachRate = 0.8f;
     float endTime;
+    int nextCombo = 1;
 
     List<Vector3> pattern = new List<Vector3>();
     List<float> beats = new List<float>();
@@ -67,10 +68,13 @@ public class rhythmEventManager : MonoBehaviour
             float songPos = MusicManager.instance.GetSongPos();
             if (beats.Count > 0 && songPos >= beats[0] - approachRate) {
                 GameObject newCircle = Instantiate(hitCircle, pattern[0], Quaternion.identity);
-                newCircle.GetComponent<hitCircle>().targetTime = beats[0];
+                hitCircle hitCircleScript = newCircle.GetComponent<hitCircle>();
+                hitCircleScript.targetTime = beats[0];
+                hitCircleScript.combo = nextCombo;
                 
                 beats.RemoveAt(0);
                 pattern.RemoveAt(0);
+                nextCombo++;
             }
 
             // if reached end, destroy this object

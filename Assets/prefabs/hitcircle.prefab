@@ -110,12 +110,20 @@ MonoBehaviour:
   sprite300: {fileID: 6321091068429342766, guid: 9fbe880c87e617748ad62828ebe13b0b, type: 3}
   sprite100: {fileID: 5947033849641293045, guid: a50d24f16adc57a45a332a827f3fe2af, type: 3}
   spriteMiss: {fileID: 1255949416096160019, guid: ae83ce580bf30fe4da271d6d1e0bacc0, type: 3}
+  comboSprites:
+  - {fileID: 21300000, guid: b69cd4fa6758f4048b947c697b77b173, type: 3}
+  - {fileID: 21300000, guid: 470a689acdc82c346bb1c3dbbbd99af2, type: 3}
+  - {fileID: 21300000, guid: 68d93248fc6631f4a97a31bf4697b379, type: 3}
+  - {fileID: 21300000, guid: 3536577910a8fd8458149701f06ecb2b, type: 3}
+  - {fileID: 21300000, guid: 992d30cd8148aee47a43b729d8a0711d, type: 3}
+  - {fileID: 21300000, guid: 6462a3cd85b87dd4f94ed5d8679fe704, type: 3}
   fadeInTime: 1
   fadeOutTime: 0
   targetTime: 0
-  perfectWindow: 0.05
-  goodWindow: 0.12
+  perfectWindow: 0.06
+  goodWindow: 0.15
   offset: 0
+  combo: 1
   audioSource: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 577c6ae56b60dad4a941abb4442dce17, type: 3}
 --- !u!58 &3302826339451294678

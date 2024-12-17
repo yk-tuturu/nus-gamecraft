@@ -136,3 +136,8 @@ MonoBehaviour:
     m_Bits: 256
   overlay: {fileID: 3601208636431934879}
   score: 0
+  noteCount: 3
+  approachRate: 0.8
+  rhythmEnd:
+    m_PersistentCalls:
+      m_Calls: []

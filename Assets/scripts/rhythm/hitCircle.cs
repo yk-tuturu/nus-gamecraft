@@ -16,6 +16,8 @@ public class hitCircle : MonoBehaviour
     public GameObject sprite100;
     public GameObject spriteMiss;
 
+    public List<Sprite> comboSprites = new List<Sprite>();
+
     // timing constants 
     public float fadeInTime;
     public float fadeOutTime;
@@ -24,6 +26,7 @@ public class hitCircle : MonoBehaviour
     public float perfectWindow = 0.05f; //50ms perfect 
     public float goodWindow = 0.12f; // 120ms good
     public float offset = 0f;
+    public int combo = 1;
 
     bool despawning = false;
 
@@ -36,8 +39,10 @@ public class hitCircle : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = hitSound;
 
+        numberSprite.sprite = comboSprites[combo - 1];
+
         float songPos = MusicManager.instance.GetSongPos();
-        approachCircle.DOScale(new Vector3(1f, 1f, 1f), 0.8f).SetEase(Ease.Linear);
+        approachCircle.DOScale(new Vector3(1f, 1f, 1f), targetTime - songPos).SetEase(Ease.Linear);
         FadeSprite(1f, fadeInTime);
     }
 

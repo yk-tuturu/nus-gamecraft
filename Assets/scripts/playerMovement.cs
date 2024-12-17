@@ -7,9 +7,12 @@ public class playerMovement : MonoBehaviour
 {
     public Vector2 movementInput;
     public Vector2 direction = Vector2.down;
+    public Sprite frontSprite;
+    public Sprite backSprite;
     BoxCollider2D box;
     Rigidbody2D rb;
     Animator anim;
+    SpriteRenderer spr;
 
     public float collisionOffset = 0.005f;
     public float moveSpeed = 1f;
@@ -21,9 +24,9 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         box = GetComponent<BoxCollider2D>();
+        spr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -54,14 +57,18 @@ public class playerMovement : MonoBehaviour
         if (movementInput.x != 0) {
             if (movementInput.x > 0) {
                 direction = Vector2.right;
+                spr.flipX = true;
             } else {
                 direction = Vector2.left;
+                spr.flipX = false;
             }
         } else {
             if (movementInput.y > 0) {
                 direction = Vector2.up;
+                spr.sprite = backSprite;
             } else {
                 direction = Vector2.down;
+                spr.sprite = frontSprite;
             }
         }
     }

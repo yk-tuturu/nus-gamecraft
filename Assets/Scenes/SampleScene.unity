@@ -973,7 +973,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 097484758f74a8d47a4b4767fecfa799, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6e4f076ad70d0e64eb1f367a72be7f6c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4245,10 +4245,148 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatTimings:
-  - 0.5
-  - 1.5
-  - 2.5
-  - 3.5
+  - 0.117
+  - 2.643
+  - 3.906
+  - 5.169
+  - 7.695
+  - 8.959
+  - 9.59
+  - 10.222
+  - 11.801
+  - 12.432
+  - 12.748
+  - 14.327
+  - 15.274
+  - 16.853
+  - 17.485
+  - 17.801
+  - 19.38
+  - 20.327
+  - 21.906
+  - 22.538
+  - 22.853
+  - 24.432
+  - 25.064
+  - 25.38
+  - 26.959
+  - 27.906
+  - 29.169
+  - 29.485
+  - 30.432
+  - 31.38
+  - 32.011
+  - 32.327
+  - 32.959
+  - 34.222
+  - 35.485
+  - 36.432
+  - 37.064
+  - 37.695
+  - 38.011
+  - 39.59
+  - 40.538
+  - 41.485
+  - 42.432
+  - 43.064
+  - 44.327
+  - 44.643
+  - 45.59
+  - 46.538
+  - 47.169
+  - 47.801
+  - 48.117
+  - 49.538
+  - 50.327
+  - 50.643
+  - 51.59
+  - 52.222
+  - 53.169
+  - 54.117
+  - 54.432
+  - 55.38
+  - 55.695
+  - 56.011
+  - 57.274
+  - 57.906
+  - 58.222
+  - 59.801
+  - 60.432
+  - 60.748
+  - 61.695
+  - 62.643
+  - 63.274
+  - 64.222
+  - 64.853
+  - 65.485
+  - 65.801
+  - 66.748
+  - 67.38
+  - 68.327
+  - 70.853
+  - 71.801
+  - 72.117
+  - 72.748
+  - 73.38
+  - 74.327
+  - 74.959
+  - 75.906
+  - 76.853
+  - 77.485
+  - 78.432
+  - 79.38
+  - 79.695
+  - 80.327
+  - 80.959
+  - 81.906
+  - 82.222
+  - 82.853
+  - 83.485
+  - 84.432
+  - 85.064
+  - 86.011
+  - 86.959
+  - 87.906
+  - 88.538
+  - 89.801
+  - 91.064
+  - 92.011
+  - 92.643
+  - 93.59
+  - 94.538
+  - 94.853
+  - 95.485
+  - 96.117
+  - 97.064
+  - 97.695
+  - 98.643
+  - 99.906
+  - 100.538
+  - 101.169
+  - 102.117
+  - 103.064
+  - 103.695
+  - 104.643
+  - 105.274
+  - 106.222
+  - 107.169
+  - 107.801
+  - 108.748
+  - 109.695
+  - 110.643
+  - 111.274
+  - 112.222
+  - 112.853
+  - 113.801
+  - 114.748
+  - 115.695
+  - 116.327
+  - 116.959
+  - 117.59
+  - 118.222
+  - 118.853
+  - 120.432
+  - 121.064
 --- !u!4 &1154993392
 Transform:
   m_ObjectHideFlags: 0
@@ -5982,7 +6120,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1687742560}
   - component: {fileID: 1687742559}
-  - component: {fileID: 1687742558}
   - component: {fileID: 1687742557}
   - component: {fileID: 1687742561}
   - component: {fileID: 1687742563}
@@ -6008,8 +6145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementInput: {x: 0, y: 0}
   direction: {x: 0, y: 0}
+  frontSprite: {fileID: 21300000, guid: b475b3954b0015a45ad6785e49932744, type: 3}
+  backSprite: {fileID: 21300000, guid: 7b8bb90aacbd0c94e80955d419b9d3cc, type: 3}
   collisionOffset: 0.005
-  moveSpeed: 2.5
+  moveSpeed: 3
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -6028,27 +6167,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   freeze: 0
---- !u!95 &1687742558
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687742556}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7117b52c397cbed4b95153c968e0cd9b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1687742559
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6090,7 +6208,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 33578f5a1dbe86b4eb6fc165949f738f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b475b3954b0015a45ad6785e49932744, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6178,18 +6296,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0022262037, y: -0.16744453}
+  m_Offset: {x: 0.008063406, y: -0.21546255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30854875, y: 0.12775506}
+  m_Size: {x: 0.86418575, y: 0.18263283}
   m_EdgeRadius: 0
 --- !u!50 &1687742563
 Rigidbody2D:
