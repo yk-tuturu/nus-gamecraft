@@ -22,7 +22,7 @@ public class CoffeeStateManager : MonoBehaviour, Interactable
 
     public int currentDrink = 0;
     public float currentScore = 0f;
-    
+    public float deltaTime = 0f;
     void Start()
     {
         currentState = IdleState; 
@@ -32,6 +32,7 @@ public class CoffeeStateManager : MonoBehaviour, Interactable
     void Update()
     {
         currentState.UpdateState(this);
+        deltaTime = Time.deltaTime;
     }
 
     public void Interact() {

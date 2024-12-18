@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CoffeeRhythmState : CoffeeBaseState
 {
@@ -26,6 +27,7 @@ public class CoffeeRhythmState : CoffeeBaseState
         currentRhythmEvent.rhythmEnd.RemoveListener(OnEnd);
         rhythmEnded = false;
         coffee.unfreezePlayer.Invoke();
+        LevelManager.instance.unfreezePatience.Invoke();
     }
 
     public override void Interact(CoffeeStateManager coffee) {

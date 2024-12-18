@@ -44,4 +44,9 @@ public class SpriteManager : MonoBehaviour
             return GetIngredientSprite(index - 1);
         }
     }
+
+    public int GetRandomDrink() {
+        int index = Random.Range(0, drinksDict.Count);
+        return drinksDict.ElementAt(index).Key;
+    }
 }

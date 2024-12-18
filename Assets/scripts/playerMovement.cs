@@ -54,23 +54,35 @@ public class playerMovement : MonoBehaviour
         if (movementInput == Vector2.zero || freeze) {
             return;
         }
-        if (movementInput.x != 0) {
-            if (movementInput.x > 0) {
-                direction = Vector2.right;
-                spr.flipX = true;
-            } else {
-                direction = Vector2.left;
-                spr.flipX = false;
-            }
-        } else {
-            if (movementInput.y > 0) {
-                direction = Vector2.up;
-                spr.sprite = backSprite;
-            } else {
-                direction = Vector2.down;
-                spr.sprite = frontSprite;
-            }
+
+        if (movementInput.x > 0) {
+            spr.flipX = true;
+        } else if (movementInput.x < 0) {
+            spr.flipX = false;
         }
+
+        if (movementInput.y > 0) {
+            spr.sprite = backSprite;
+        } else if (movementInput.y < 0) {
+            spr.sprite = frontSprite;
+        }
+        // if (movementInput.x != 0) {
+        //     if (movementInput.x > 0) {
+        //         direction = Vector2.right;
+        //         spr.flipX = true;
+        //     } else {
+        //         direction = Vector2.left;
+        //         spr.flipX = false;
+        //     }
+        // } else {
+        //     if (movementInput.y > 0) {
+        //         direction = Vector2.up;
+        //         spr.sprite = backSprite;
+        //     } else {
+        //         direction = Vector2.down;
+        //         spr.sprite = frontSprite;
+        //     }
+        // }
     }
 
     void OnMove(InputValue movementValue) {
@@ -85,15 +97,27 @@ public class playerMovement : MonoBehaviour
 
         Vector2 g_position = gameObject.transform.position;
         Vector2 box_center = g_position + box.offset;
-        float laserLength;
-        if (direction.x == 0) {
-            laserLength = box.size.y / 2 + 0.1f;
-        } else {
-            laserLength = box.size.x / 2 + 0.1f;
+
+        float laserLengthY = box.size.y / 2 + 0.2f;
+        float laserLengthX = box.size.x / 2 + 0.2f;
+        
+        int hori = 0;
+        int vert = 0; 
+        if (spr.flipX) {
+            hori = 1;
+        } else { hori = -1; }
+
+        if (spr.sprite == backSprite) {
+            vert = 1; 
+        } else { vert = -1; }
+        RaycastHit2D hitHori = Physics2D.Raycast(box_center, new Vector3(hori, 0, 0) , laserLengthX, interactMask);
+        RaycastHit2D hitVert = Physics2D.Raycast(box_center, new Vector3(0, vert, 0) , laserLengthY, interactMask);
+        if (hitHori.collider != null) {
+            hitHori.collider.GetComponent<Interactable>().Interact();
         }
-        RaycastHit2D hit = Physics2D.Raycast(box_center, direction , laserLength, interactMask);
-        if (hit.collider != null) {
-            hit.collider.GetComponent<Interactable>().Interact();
+
+        if (hitVert.collider != null) {
+            hitVert.collider.GetComponent<Interactable>().Interact();
         }
     }
 

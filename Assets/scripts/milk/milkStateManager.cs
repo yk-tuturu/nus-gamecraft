@@ -16,6 +16,8 @@ public class MilkStateManager : MonoBehaviour, Interactable
 
     public int currentDrink = 4;
     public float currentScore = 100f;
+
+    public float deltaTime = 0f;
     
     void Start()
     {
@@ -26,6 +28,7 @@ public class MilkStateManager : MonoBehaviour, Interactable
     void Update()
     {
         currentState.UpdateState(this);
+        deltaTime = Time.deltaTime;
     }
 
     public void Interact() {

@@ -83,4 +83,25 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
+    public void ConsumeTray(int id) {
+        for (int i = 0; i < tray.Count; i++) {
+            if (tray[i].id == id) {
+                GameObject temp = tray[i].gameObject;
+                tray.RemoveAt(i);
+                Destroy(temp);
+                return;
+            }
+        }
+    }
+
+    public InventoryIcon GetDrinkById(int id) {
+        for (int i = 0; i < tray.Count; i++) {
+            if (tray[i].id == id) {
+                return tray[i];
+            }
+        }
+        Debug.Log("couldn't find id");
+        return null;
+    }
 }

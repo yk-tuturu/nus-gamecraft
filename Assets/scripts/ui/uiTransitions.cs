@@ -14,6 +14,7 @@ public class uiTransitions : MonoBehaviour
     }
 
     public void UIShrink(bool disableAtEnd) {
+        DOTween.Kill(gameObject);
         if (disableAtEnd) {
             transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad).OnComplete(()=> {
                 gameObject.SetActive(false);
@@ -24,7 +25,10 @@ public class uiTransitions : MonoBehaviour
     }
 
     public void UIExpand() {
+        DOTween.Kill(gameObject);
         Debug.Log("expand");
-        transform.DOScale(1f, 0.3f).SetEase(Ease.Linear);
+        transform.DOScale(1f, 0.3f).SetEase(Ease.Linear).OnComplete(()=>{
+            gameObject.SetActive(true);
+        });
     }
 }

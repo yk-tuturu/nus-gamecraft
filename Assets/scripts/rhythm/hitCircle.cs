@@ -43,7 +43,7 @@ public class hitCircle : MonoBehaviour
 
         float songPos = MusicManager.instance.GetSongPos();
         approachCircle.DOScale(new Vector3(1f, 1f, 1f), targetTime - songPos).SetEase(Ease.Linear);
-        FadeSprite(1f, fadeInTime);
+        FadeSprite(0.7f, fadeInTime);
     }
 
     void Update() {
@@ -61,6 +61,11 @@ public class hitCircle : MonoBehaviour
             hitOverlaySprite.DOFade(0f, 0.1f);
             approachCircleSprite.DOFade(0f, 0.1f);
             numberSprite.DOFade(0f, 0.1f).OnComplete(() => {
+                DOTween.Kill(hitCircleSprite);
+                DOTween.Kill(hitOverlaySprite);
+                DOTween.Kill(approachCircleSprite);
+                DOTween.Kill(numberSprite);
+
                 Destroy(gameObject);
             });
         }
@@ -97,6 +102,7 @@ public class hitCircle : MonoBehaviour
         } else {
             Debug.Log("miss");
             Instantiate(spriteMiss, transform.position, Quaternion.identity);
+            Despawn();
             return 0;
         }
     }

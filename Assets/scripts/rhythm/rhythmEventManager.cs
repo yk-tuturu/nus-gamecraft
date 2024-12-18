@@ -32,6 +32,8 @@ public class rhythmEventManager : MonoBehaviour
         overlay.DOFade((float)188/255, 0.5f).OnComplete(()=> {
             Begin();
         });
+
+        LevelManager.instance.freezePatience.Invoke();
     }
 
     void Begin() {
@@ -81,10 +83,15 @@ public class rhythmEventManager : MonoBehaviour
             if (songPos > endTime && started) {
                 overlay.DOFade(0f, 0.2f).OnComplete(()=> {
                     rhythmEnd.Invoke();
+                    DOTween.Kill(overlay);
                     Destroy(gameObject);
                 });
             }
         }
         
+    }
+
+    void OnDisable() {
+        LevelManager.instance.unfreezePatience.Invoke();
     }
 }
