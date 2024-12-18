@@ -139,7 +139,7 @@ public class combineMenuManager : MonoBehaviour
         }
 
         for (int i = 0; i < selected.Count; i++) {
-            if (selected[i].index >= 1 && selected[i].index <= 3) {
+            if (selected[i].index >= 1 && selected[i].index <= 4) {
                 // this means we already have a caffeine in place, which makes an invalid combo
                 if (caffeineID != 0) {
                     invalid = true;
@@ -149,7 +149,7 @@ public class combineMenuManager : MonoBehaviour
                 caffeineID = selected[i].index;
                 caffeineScore = selected[i].score;
             
-            } else if (selected[i].index == 4) {
+            } else if (selected[i].index == 5) {
                 if (milkID != 0) {
                     invalid = true;
                     break;

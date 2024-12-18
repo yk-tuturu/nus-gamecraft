@@ -50,7 +50,8 @@ public class rhythmEventManager : MonoBehaviour
     void Update()
     {
         if (started) {
-            if (Keyboard.current.anyKey.wasPressedThisFrame)
+            if (Keyboard.current.anyKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame ||
+                Mouse.current.rightButton.wasPressedThisFrame)
             {
                 // Get the mouse position in world space
                 Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());

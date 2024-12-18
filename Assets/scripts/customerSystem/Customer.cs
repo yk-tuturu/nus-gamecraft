@@ -23,6 +23,7 @@ public class Customer : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        sprite.sprite = SpriteManager.instance.GetCustomerSprite();
 
         foreach (Transform child in path) {
             waypoints.Add(child);
@@ -43,7 +44,10 @@ public class Customer : MonoBehaviour
     {
         if (waypointIndex <= waypoints.Count - 1)
         {
-            transform.position = Vector2.MoveTowards(transform.position,
+            Debug.Log("moving");
+            Debug.Log(transform.position);
+            Debug.Log(waypoints[waypointIndex].transform.position);
+            transform.position = Vector3.MoveTowards(transform.position,
                waypoints[waypointIndex].transform.position,
                moveSpeed * Time.deltaTime);
 

@@ -11,11 +11,23 @@ public class menuManager : MonoBehaviour
     public int selected = 0;
 
     public List<GameObject> selectedOutlines = new List<GameObject>();
+
+    public GameObject[] locked;
+    public GameObject chocolate;
+    public GameObject hojicha;
     
     // Start is called before the first frame update
     void Start()
     {
         ui = GetComponent<uiTransitions>();
+
+        if (LevelLoader.instance.currentLevel == 1) {
+            chocolate.SetActive(false);
+            hojicha.SetActive(false);
+            foreach (GameObject obj in locked) {
+                obj.SetActive(true);
+            }
+        }
     }
 
     // Update is called once per frame

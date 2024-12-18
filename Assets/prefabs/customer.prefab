@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.03, y: 2.03, z: 0}
-  m_LocalScale: {x: 0.8432, y: 0.8432, z: 0.8432}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: b475b3954b0015a45ad6785e49932744, type: 3}
-  m_Color: {r: 1, g: 0.9813669, b: 0.6320754, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e5dd198771e49014ba21fc2510297f4a, type: 3}
+  m_Color: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,3 +100,8 @@ MonoBehaviour:
   path: {fileID: 0}
   waypoints: []
   moveSpeed: 2
+  waypointIndex: 0
+  targetTable: {fileID: 0}
+  isMoving: 1
+  isMovingAway: 0
+  doubled: 0

@@ -14,7 +14,7 @@ public class MilkStateManager : MonoBehaviour, Interactable
     public loadingBar bar;
     public GameObject bubble;
 
-    public int currentDrink = 4;
+    public int currentDrink = 5;
     public float currentScore = 100f;
 
     public float deltaTime = 0f;

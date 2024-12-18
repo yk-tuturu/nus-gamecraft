@@ -21,7 +21,7 @@ public class Bubble : MonoBehaviour
     void Awake() {
         rect = GetComponent<RectTransform>();
         originalPos = rect.anchoredPosition;
-        targetPos = new Vector3(originalPos.x, originalPos.y + 0.12f, originalPos.z);
+        targetPos = new Vector3(originalPos.x, originalPos.y + 0.08f, originalPos.z);
         movementTween = rect.DOAnchorPos(targetPos, 1f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
     }
 

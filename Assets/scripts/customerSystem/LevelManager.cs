@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     public float minCustomerGap = 10f;
     public float maxCustomerGap = 20f;
     public float doubleChance = 0.3f;
+    public float patience = 60f;
+    public float doublePatience = 90f;
 
     public List<Transform> paths = new List<Transform>();
     public List<Table> tables = new List<Table>();
@@ -32,22 +34,55 @@ public class LevelManager : MonoBehaviour
     public float currentMoney = 0f;
 
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI targetMoneyText;
     public GameObject LevelCompleteText;
     public GameObject LevelFailText;
 
     void Awake() {
         instance = this;
+        Time.timeScale = 0f;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        targetMoney = customersToSpawn * 10 * 0.6f;
-
-        foreach (Transform child in tableParent) {
-            Table table = child.GetComponent<Table>();
-            tables.Add(table);
+         if (LevelLoader.instance.currentLevel == 1) {
+            minCustomerGap = 20f;
+            maxCustomerGap = 30f;
+            doubleChance = 0.15f;
+            customersToSpawn = 6;
+            foreach (Transform child in tableParent) {
+                Table table = child.GetComponent<Table>();
+                table.patience = 60f;
+                table.doublePatience = 90f;
+                tables.Add(table);
+            }
+        } else if (LevelLoader.instance.currentLevel == 2) {
+            minCustomerGap = 15f;
+            maxCustomerGap = 30f;
+            doubleChance = 0.3f;
+            customersToSpawn = 12;
+            foreach (Transform child in tableParent) {
+                Table table = child.GetComponent<Table>();
+                table.patience = 60f;
+                table.doublePatience = 90f;
+                tables.Add(table);
+            }
+        } else if (LevelLoader.instance.currentLevel == 3) {
+            minCustomerGap = 15f;
+            maxCustomerGap = 20f;
+            doubleChance = 0.4f;
+            customersToSpawn = 20;
+            foreach (Transform child in tableParent) {
+                Table table = child.GetComponent<Table>();
+                table.patience = 45f;
+                table.doublePatience = 75f;
+                tables.Add(table);
+            }
         }
+
+        targetMoney = Mathf.Round(customersToSpawn * 10 * 0.6f);
+        targetMoneyText.text = "Target: $" + targetMoney.ToString("0.00");
 
         timeToNextSpawn = Time.time + 8f;
     }
@@ -143,5 +178,21 @@ public class LevelManager : MonoBehaviour
         } else {
             LevelFailText.SetActive(true);
         }
+    }
+
+    public void Unpause() {
+        Time.timeScale = 1f;
+    }
+
+    public void NextLevel() {
+        LevelLoader.instance.LoadNextLevel();
+    } 
+    
+    public void Retry() {
+        LevelLoader.instance.Reload();
+    }
+
+    public void BackToMenu() {
+        LevelLoader.instance.LoadMenu();
     }
 }

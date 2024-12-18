@@ -24,5 +24,9 @@ public class InventoryIcon : MonoBehaviour
             bgImage.color = new Color(58f/255, 58f/255, 69f/255);
         }
     }
+
+    public void Delete() {
+        InventoryManager.instance.ConsumeTray(id);
+    }
     
 }

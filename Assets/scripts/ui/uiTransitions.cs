@@ -31,4 +31,14 @@ public class uiTransitions : MonoBehaviour
             gameObject.SetActive(true);
         });
     }
+
+    public void UIFadeOut() {
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+
+        canvasGroup.DOFade(0, 0.5f).OnComplete(() =>
+        {
+            // Optional: Disable the panel after fading out
+            gameObject.SetActive(false);
+        });
+    }
 }

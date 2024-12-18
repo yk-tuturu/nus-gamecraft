@@ -20,7 +20,9 @@ public class Table : MonoBehaviour, Interactable
     public Image doubleBubbleImg0;
     public Image doubleBubbleImg1;
 
-    public loadingBar bar;
+    public loadingBar singleBar;
+    public loadingBar doubleBar;
+    public loadingBar currentBar;
     public float patience = 30f;
     public float doublePatience = 45f;
     public float currentPatience;
@@ -42,7 +44,7 @@ public class Table : MonoBehaviour, Interactable
         if (occupied && !paused) {
             currentPatience -= Time.deltaTime;
             float fillAmount = Mathf.Max((float)currentPatience / maxPatience, 0f);
-            bar.SetFill(fillAmount);
+            currentBar.SetFill(fillAmount);
             if (fillAmount <= 0f) {
                 Leave();
             }
@@ -65,14 +67,15 @@ public class Table : MonoBehaviour, Interactable
             doubleBubble.SetActive(true);
             doubleBubbleImg0.sprite = SpriteManager.instance.GetSprite(orders[0]);
             doubleBubbleImg1.sprite = SpriteManager.instance.GetSprite(orders[1]);
+            currentBar = doubleBar;
         } else {
             bubble.SetActive(true);
             bubbleImg.sprite = SpriteManager.instance.GetSprite(orders[0]);
+            currentBar = singleBar;
         }
 
         occupied = true;
-        bar.gameObject.SetActive(true);
-        bar.currentValue = 1f;
+        currentBar.SetFill(1f);
         if (numberOfCustomers == 2) {
             currentPatience = doublePatience;
             maxPatience = doublePatience;
@@ -103,7 +106,6 @@ public class Table : MonoBehaviour, Interactable
 
         bubble.SetActive(false);
         doubleBubble.SetActive(false);
-        bar.gameObject.SetActive(false);
 
         occupied = false;
     }

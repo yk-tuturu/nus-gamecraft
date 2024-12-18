@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour
     public List<InventoryIcon> inventory = new List<InventoryIcon>();
     public List<InventoryIcon> tray = new List<InventoryIcon>();
     public GameObject iconPrefab;
+    public GameObject deleteableIconPrefab;
     public Transform inventoryPanel;
     public Transform trayPanel;
 
@@ -41,7 +42,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void AddDrinkToTray(int index, float score) {
-        GameObject iconObject = Instantiate(iconPrefab, new Vector3(0, 0, 0), Quaternion.identity, trayPanel);
+        GameObject iconObject = Instantiate(deleteableIconPrefab, new Vector3(0, 0, 0), Quaternion.identity, trayPanel);
         InventoryIcon icon = iconObject.GetComponent<InventoryIcon>();
         icon.id = nextId;
         icon.index = index;
