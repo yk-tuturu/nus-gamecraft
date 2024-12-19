@@ -9,6 +9,10 @@ public class CoffeeRhythmState : CoffeeBaseState
     bool rhythmEnded = false;
 
     public override void EnterState(CoffeeStateManager coffee) {
+        if (tutorialController.instance != null && tutorialController.instance.currentStep <= 6) {
+            return;
+        }
+
         GameObject rhythm = Object.Instantiate(coffee.rhythmEvent, new Vector3(0, 0, 0), Quaternion.identity);
         currentRhythmEvent = rhythm.GetComponent<rhythmEventManager>();
         currentRhythmEvent.rhythmEnd.AddListener(OnEnd);
@@ -23,6 +27,10 @@ public class CoffeeRhythmState : CoffeeBaseState
     }
 
     public override void ExitState(CoffeeStateManager coffee) {
+        if (tutorialController.instance != null && tutorialController.instance.currentStep <= 7) {
+            return;
+        }
+
         coffee.currentScore = ((float)currentRhythmEvent.score / (currentRhythmEvent.noteCount * 300)) * 100;
         currentRhythmEvent.rhythmEnd.RemoveListener(OnEnd);
         rhythmEnded = false;

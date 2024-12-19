@@ -15,6 +15,7 @@ public class menuManager : MonoBehaviour
     public GameObject[] locked;
     public GameObject chocolate;
     public GameObject hojicha;
+    public GameObject matcha;
     
     // Start is called before the first frame update
     void Start()
@@ -24,8 +25,15 @@ public class menuManager : MonoBehaviour
         if (LevelLoader.instance.currentLevel == 1) {
             chocolate.SetActive(false);
             hojicha.SetActive(false);
-            foreach (GameObject obj in locked) {
-                obj.SetActive(true);
+            for (int i = 0; i < 2; i++) {
+                locked[i].SetActive(true);
+            }
+        } else if (LevelLoader.instance.currentLevel == 0) {
+            chocolate.SetActive(false);
+            hojicha.SetActive(false);
+            matcha.SetActive(false);
+            for (int i = 0; i < 3; i++) {
+                locked[i].SetActive(true);
             }
         }
     }
@@ -37,6 +45,10 @@ public class menuManager : MonoBehaviour
     }
 
     public void Close() {
+        if (LevelLoader.instance.currentLevel == 0 && tutorialController.instance.currentStep <= 5 ) {
+            return;
+        }
+
         if (selected != 0) {
             selectedOutlines[selected - 1].SetActive(false);
         }
@@ -54,6 +66,10 @@ public class menuManager : MonoBehaviour
     }
 
     public void Go() {
+        if (LevelLoader.instance.currentLevel == 0 && tutorialController.instance.currentStep <= 4 ) {
+            return;
+        }
+
         if (selected == 0) {
             return;
         }

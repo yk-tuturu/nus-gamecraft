@@ -54,5 +54,6 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadMenu() {
         SceneManager.LoadScene("titleScreen");
+        currentLevel = -1;
     }
 }

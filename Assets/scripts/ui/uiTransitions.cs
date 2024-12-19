@@ -41,4 +41,10 @@ public class uiTransitions : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
+
+    public void UIFadeIn() {
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
+        canvasGroup.DOFade(1, 0.3f);
+    }
 }

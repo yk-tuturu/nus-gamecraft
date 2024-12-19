@@ -120,6 +120,7 @@ public class Table : MonoBehaviour, Interactable
                     if (tray[i].index == orders[j]) {
                         toBeConsumed.Add(tray[i].id);
                         FulfillOrder(tray[i].id, j);
+                        break;
                     }
                 }
             }

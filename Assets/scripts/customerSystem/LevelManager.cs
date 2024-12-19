@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
 
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI targetMoneyText;
+    public GameObject targetMoneyPanel;
     public GameObject LevelCompleteText;
     public GameObject LevelFailText;
 
@@ -46,43 +47,45 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        foreach (Transform child in tableParent) {
+            Table table = child.GetComponent<Table>();
+            tables.Add(table);
+        }
+        
          if (LevelLoader.instance.currentLevel == 1) {
             minCustomerGap = 20f;
             maxCustomerGap = 30f;
             doubleChance = 0.15f;
             customersToSpawn = 6;
-            foreach (Transform child in tableParent) {
-                Table table = child.GetComponent<Table>();
+            foreach (Table table in tables) {
                 table.patience = 60f;
                 table.doublePatience = 90f;
-                tables.Add(table);
             }
         } else if (LevelLoader.instance.currentLevel == 2) {
             minCustomerGap = 15f;
             maxCustomerGap = 30f;
             doubleChance = 0.3f;
             customersToSpawn = 12;
-            foreach (Transform child in tableParent) {
-                Table table = child.GetComponent<Table>();
+            foreach (Table table in tables) {
                 table.patience = 60f;
                 table.doublePatience = 90f;
-                tables.Add(table);
             }
         } else if (LevelLoader.instance.currentLevel == 3) {
             minCustomerGap = 15f;
             maxCustomerGap = 20f;
             doubleChance = 0.4f;
             customersToSpawn = 20;
-            foreach (Transform child in tableParent) {
-                Table table = child.GetComponent<Table>();
+            foreach (Table table in tables) {
                 table.patience = 45f;
                 table.doublePatience = 75f;
-                tables.Add(table);
             }
         }
 
-        targetMoney = Mathf.Round(customersToSpawn * 10 * 0.6f);
+        targetMoney = Mathf.Round(customersToSpawn * 10 * 0.8f);
         targetMoneyText.text = "Target: $" + targetMoney.ToString("0.00");
+        if (LevelLoader.instance.currentLevel != 0) {
+            targetMoneyPanel.SetActive(true);
+        }
 
         timeToNextSpawn = Time.time + 8f;
     }
@@ -90,6 +93,10 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LevelLoader.instance.currentLevel == 0) {
+            return;
+        }
+
         if (Time.time > timeToNextSpawn && customersToSpawn > 0) {
             SpawnCustomer();
             SetTimeToNextSpawn();
@@ -194,5 +201,16 @@ public class LevelManager : MonoBehaviour
 
     public void BackToMenu() {
         LevelLoader.instance.LoadMenu();
+    }
+
+    public void SpawnTutorialCustomer() {
+        GameObject customerObj = Instantiate(customerPrefab, customerSpawner.position, Quaternion.identity, customerParent);
+        Customer customer = customerObj.GetComponent<Customer>();
+
+        Table targetTable = tables[1];
+
+        customer.targetTable = targetTable;
+        customer.path = targetTable.pathTowardsLeft;
+        targetTable.patience = 1000f;
     }
 }

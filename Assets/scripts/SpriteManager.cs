@@ -32,9 +32,12 @@ public class SpriteManager : MonoBehaviour
     }
 
     void Start() {
-        if (LevelLoader.instance.currentLevel == 1) {
+        if (LevelLoader.instance.currentLevel <= 1) {
             drinksDict.Remove(35);
             drinksDict.Remove(45);
+        }
+        if (LevelLoader.instance.currentLevel == 0) {
+            drinksDict.Remove(25);
         }
     }
 

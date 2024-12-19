@@ -124,6 +124,10 @@ public class combineMenuManager : MonoBehaviour
     }
 
     public void Close() {
+        if (tutorialController.instance != null && (tutorialController.instance.currentStep == 11 || tutorialController.instance.currentStep == 12)) {
+            return;
+        }
+        
         combiner.ChangeState(combiner.IdleState);
     }
 

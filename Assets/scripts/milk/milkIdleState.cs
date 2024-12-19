@@ -17,7 +17,9 @@ public class MilkIdleState : MilkBaseState
     }
 
     public override void Interact(MilkStateManager milk) {
-        Debug.Log("interacting with milk frother");
+        if (tutorialController.instance != null && tutorialController.instance.currentStep <= 7) {
+            return;
+        }
         
         //Object.Instantiate(coffee.rhythmEvent, new Vector3(0, 0, 0), Quaternion.identity);
         milk.ChangeState(milk.OccupiedState);

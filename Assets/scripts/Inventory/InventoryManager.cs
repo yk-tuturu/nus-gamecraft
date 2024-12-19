@@ -105,4 +105,22 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("couldn't find id");
         return null;
     }
+
+    public bool InvContains(int index) {
+        for (int i = 0; i < inventory.Count; i++) {
+            if (inventory[i].index == index) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool TrayContains(int index) {
+        for (int i = 0; i < tray.Count; i++) {
+            if (tray[i].index == index) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
