@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class playerMovement : MonoBehaviour
 {
@@ -32,7 +31,17 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("e") || Input.GetKeyDown("space")) {
+            OnInteract();
+        }
+
+        movementInput.x = Input.GetAxisRaw("Horizontal");
+        movementInput.y = Input.GetAxisRaw("Vertical");
+
+        if (movementInput.x != 0 && movementInput.y != 0) {
+            movementInput = movementInput * Mathf.Sqrt(2) / 2f;
+        }
+
     }
 
     void FixedUpdate() {
@@ -47,6 +56,8 @@ public class playerMovement : MonoBehaviour
             if (count == 0) {
                 rb.MovePosition(rb.position + movementInput * Time.fixedDeltaTime * moveSpeed);
             }
+
+            updateDirection();
         }
     }
 
@@ -83,11 +94,6 @@ public class playerMovement : MonoBehaviour
         //         spr.sprite = frontSprite;
         //     }
         // }
-    }
-
-    void OnMove(InputValue movementValue) {
-        movementInput = movementValue.Get<Vector2>();
-        updateDirection();
     }
 
     void OnInteract() {

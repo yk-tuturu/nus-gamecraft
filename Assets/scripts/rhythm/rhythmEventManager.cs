@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using DG.Tweening;
 
@@ -23,7 +22,7 @@ public class rhythmEventManager : MonoBehaviour
 
     bool started = false;
     public UnityEvent rhythmEnd;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +33,7 @@ public class rhythmEventManager : MonoBehaviour
         });
 
         LevelManager.instance.freezePatience.Invoke();
+        pauseManager.instance.DisablePause();
     }
 
     void Begin() {
@@ -50,11 +50,10 @@ public class rhythmEventManager : MonoBehaviour
     void Update()
     {
         if (started) {
-            if (Keyboard.current.anyKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame ||
-                Mouse.current.rightButton.wasPressedThisFrame)
+            if (Input.anyKeyDown)
             {
-                // Get the mouse position in world space
-                Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                //Get the mouse position in world space
+                Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
                 RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, hitCircleLayer);
 
@@ -63,6 +62,26 @@ public class rhythmEventManager : MonoBehaviour
                     hitCircle circleScript = hit.collider.GetComponent<hitCircle>();
                     if (circleScript != null) {
                         score += circleScript.calculateScore();
+                    }
+                }
+            }
+
+            if (Input.touchCount > 0) // Check if there is at least one touch
+            {
+                Touch touch = Input.GetTouch(0); // Get the first touch
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Vector3 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
+                    touchPosition.z = 0f;
+                    
+                    RaycastHit2D hit = Physics2D.Raycast(touchPosition, Vector2.zero, Mathf.Infinity, hitCircleLayer);
+                    if (hit.collider != null)
+                    {
+                        hitCircle circleScript = hit.collider.GetComponent<hitCircle>();
+                        if (circleScript != null) {
+                            score += circleScript.calculateScore();
+                        }
                     }
                 }
             }
@@ -94,5 +113,6 @@ public class rhythmEventManager : MonoBehaviour
 
     void OnDisable() {
         LevelManager.instance.unfreezePatience.Invoke();
+        pauseManager.instance.EnablePause();
     }
 }

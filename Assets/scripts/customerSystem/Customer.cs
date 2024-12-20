@@ -44,9 +44,6 @@ public class Customer : MonoBehaviour
     {
         if (waypointIndex <= waypoints.Count - 1)
         {
-            Debug.Log("moving");
-            Debug.Log(transform.position);
-            Debug.Log(waypoints[waypointIndex].transform.position);
             transform.position = Vector3.MoveTowards(transform.position,
                waypoints[waypointIndex].transform.position,
                moveSpeed * Time.deltaTime);
@@ -59,12 +56,10 @@ public class Customer : MonoBehaviour
 
         if (waypointIndex == waypoints.Count) {
             if (isMovingAway) {
-                Debug.Log("destroying customer");
                 Destroy(gameObject);
                 return;
             }
 
-            Debug.Log("arrived");
             if (doubled) {
                 targetTable.OccupyTable(2, this);
             } else {

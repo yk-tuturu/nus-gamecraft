@@ -120,8 +120,8 @@ MonoBehaviour:
   fadeInTime: 1
   fadeOutTime: 0
   targetTime: 0
-  perfectWindow: 0.06
-  goodWindow: 0.15
+  perfectWindow: 0.1
+  goodWindow: 0.2
   offset: 0
   combo: 1
   audioSource: {fileID: 0}
@@ -329,7 +329,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: 9f3dbe71be2c92b44815f8925402dda1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0

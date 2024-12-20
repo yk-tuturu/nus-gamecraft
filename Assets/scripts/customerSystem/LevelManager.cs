@@ -38,10 +38,10 @@ public class LevelManager : MonoBehaviour
     public GameObject targetMoneyPanel;
     public GameObject LevelCompleteText;
     public GameObject LevelFailText;
+    
 
     void Awake() {
         instance = this;
-        Time.timeScale = 0f;
     }
 
     // Start is called before the first frame update
@@ -76,16 +76,13 @@ public class LevelManager : MonoBehaviour
             doubleChance = 0.4f;
             customersToSpawn = 20;
             foreach (Table table in tables) {
-                table.patience = 45f;
+                table.patience = 50f;
                 table.doublePatience = 75f;
             }
         }
 
         targetMoney = Mathf.Round(customersToSpawn * 10 * 0.8f);
         targetMoneyText.text = "Target: $" + targetMoney.ToString("0.00");
-        if (LevelLoader.instance.currentLevel != 0) {
-            targetMoneyPanel.SetActive(true);
-        }
 
         timeToNextSpawn = Time.time + 8f;
     }
@@ -185,10 +182,6 @@ public class LevelManager : MonoBehaviour
         } else {
             LevelFailText.SetActive(true);
         }
-    }
-
-    public void Unpause() {
-        Time.timeScale = 1f;
     }
 
     public void NextLevel() {

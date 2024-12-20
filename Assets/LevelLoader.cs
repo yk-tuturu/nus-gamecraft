@@ -8,6 +8,8 @@ public class LevelLoader : MonoBehaviour
     // Static reference to the single instance
     public static LevelLoader instance { get; private set; }
     public int currentLevel = -1;
+    public loadingBar bar;
+    public GameObject loadingCanvas;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class LevelLoader : MonoBehaviour
         if (currentLevel == 1) {
             Debug.Log("hello from scene manager we are in level 1");
         }
+        bar.SetFill(0.5f);
     }
 
     // Update is called once per frame
@@ -38,22 +41,38 @@ public class LevelLoader : MonoBehaviour
 
     public void ChangeLevel(int level) {
         currentLevel = level;
-        SceneManager.LoadScene("game");
+        StartCoroutine(LoadAsync("game"));
     }
 
     public void LoadNextLevel() {
         if (currentLevel < 3) {
             currentLevel++;
-            SceneManager.LoadScene("game");
+            StartCoroutine(LoadAsync("game"));
         }
     }
 
     public void Reload() {
-        SceneManager.LoadScene("game");
+        StartCoroutine(LoadAsync("game"));
     }
 
     public void LoadMenu() {
-        SceneManager.LoadScene("titleScreen");
+        StartCoroutine(LoadAsync("titleScreen"));
         currentLevel = -1;
+    }
+
+    IEnumerator LoadAsync(string name) {
+        Time.timeScale = 0f; 
+        AsyncOperation operation = SceneManager.LoadSceneAsync(name);
+        bar.SetFill(0f);
+        loadingCanvas.SetActive(true);
+
+        while (!operation.isDone) {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            bar.SetFill(progress);
+            Debug.Log(progress);
+            yield return null;
+        }
+
+        loadingCanvas.SetActive(false);
     }
 }

@@ -161,6 +161,9 @@ public class tutorialController : MonoBehaviour
             case 15: 
                 NextPanel();
                 break;
+            case 16: 
+                NextPanel();
+                break;
             default:
                 break;
         }
